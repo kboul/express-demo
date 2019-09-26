@@ -54,7 +54,6 @@ app.get('/api/courses/:id', (req, res) => {
 });
 
 app.put('/api/courses/:id', (req, res) => {
-    // check if course exists
     const {
         params: { id },
         body: { name }
