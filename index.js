@@ -1,5 +1,5 @@
+const Joi = require('@hapi/joi');
 const express = require('express');
-
 const app = express();
 
 // enable parsing of JSON objects
@@ -22,15 +22,21 @@ app.get('/api/courses', (req, res) => {
 });
 
 app.post('/api/courses', (req, res) => {
+    const schema = Joi.object({
+        name: Joi.string()
+            .min(3)
+            .required()
+    });
+
+    const validation = schema.validate(req.body);
+
     const {
         body: { name }
     } = req;
 
-    if (!name || name.length < 3) {
+    if (validation.error) {
         // Bad request
-        res.status(400).send(
-            'Name is required and should be min 3 charachters'
-        );
+        res.status(400).send(validation.error.details[0].message);
         return;
     }
 
