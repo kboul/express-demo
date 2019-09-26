@@ -8,6 +8,8 @@ const logger = require('./middlewares/logger.js');
 // adding a piece of middleware...
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// serve static files
+app.use(express.static('assets'));
 
 // custom middleware
 app.use(logger);
