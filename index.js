@@ -1,6 +1,6 @@
-const Joi = require('@hapi/joi');
 const express = require('express');
 const app = express();
+const validateCourse = require('./utils/validateCourse.js');
 
 // enable parsing of JSON objects
 // in the body of the request by
@@ -22,27 +22,16 @@ app.get('/api/courses', (req, res) => {
 });
 
 app.post('/api/courses', (req, res) => {
-    const schema = Joi.object({
-        name: Joi.string()
-            .min(3)
-            .required()
-    });
-
-    const validation = schema.validate(req.body);
-
-    const {
-        body: { name }
-    } = req;
-
-    if (validation.error) {
+    const { error } = validateCourse(req.body);
+    if (error) {
         // Bad request
-        res.status(400).send(validation.error.details[0].message);
+        res.status(400).send(error.details[0].message);
         return;
     }
 
     const course = {
         id: courses.length + 1,
-        name
+        name: req.body.name
     };
 
     courses.push(course);
@@ -54,13 +43,37 @@ app.get('/api/courses/:id', (req, res) => {
         params: { id }
     } = req;
 
-    const selectedCourse = courses.find(course => course.id === parseInt(id));
+    const course = courses.find(c => c.id === parseInt(id));
 
-    if (!selectedCourse) {
+    if (!course) {
         res.status(404).send(`The course with the id ${id} was not found`);
     }
 
-    res.send(selectedCourse);
+    res.send(course);
+});
+
+app.put('/api/courses/:id', (req, res) => {
+    // check if course exists
+    const {
+        params: { id },
+        body: { name }
+    } = req;
+
+    const course = courses.find(c => c.id === parseInt(id));
+    if (!course) {
+        res.status(404).send(`The course with the id ${id} was not found`);
+    }
+
+    const { error } = validateCourse(req.body);
+    if (error) {
+        // Bad request
+        res.status(400).send(error.details[0].message);
+        return;
+    }
+
+    // update course
+    course.name = name;
+    res.send(course);
 });
 
 const port = process.env.PORT || 5000;
