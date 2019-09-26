@@ -7,6 +7,7 @@ const logger = require('./middlewares/logger.js');
 // in the body of the request by
 // adding a piece of middleware...
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // custom middleware
 app.use(logger);
