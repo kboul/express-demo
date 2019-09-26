@@ -1,11 +1,15 @@
 const express = require('express');
 const app = express();
 const validateCourse = require('./utils/validateCourse.js');
+const logger = require('./middlewares/logger.js');
 
 // enable parsing of JSON objects
 // in the body of the request by
 // adding a piece of middleware...
 app.use(express.json());
+
+// custom middleware
+app.use(logger);
 
 const courses = [
     { id: 1, name: 'course1' },
