@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const helmet = require('helmet');
+const morgan = require('morgan');
 const validateCourse = require('./utils/validateCourse.js');
 const logger = require('./middlewares/logger.js');
 
@@ -10,6 +12,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // serve static files
 app.use(express.static('assets'));
+app.use(helmet());
+app.use(morgan('tiny'));
 
 // custom middleware
 app.use(logger);
