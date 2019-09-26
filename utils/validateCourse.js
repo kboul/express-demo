@@ -3,7 +3,7 @@ const Joi = require('@hapi/joi');
 /**
  *
  * @param {Object} course
- * @returns {Object}
+ * @returns {Object} - validation error object
  */
 
 const validateCourse = course => {
@@ -14,7 +14,6 @@ const validateCourse = course => {
             .min(3)
             .required()
     });
-
     return schema.validate(course);
 };
 
