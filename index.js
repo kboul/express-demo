@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const config = require('config');
 const startupDebugger = require('debug')('app:startup');
 const logger = require('./middlewares/logger.js');
+const home = require('./routes/home');
 const courses = require('./routes/courses');
 
 // enable parsing of JSON objects
@@ -23,6 +24,7 @@ if (app.get('env') === 'development') {
     startupDebugger('Morgan enabled');
 }
 
+app.use('/', home);
 // use this router when api endpoints start with /api/courses
 app.use('/api/courses', courses);
 
@@ -33,11 +35,6 @@ console.log(`DB password: ${config.DB.password}`);
 // use template engine
 app.set('view engine', 'pug');
 app.set('views', './views'); // default views folder should be in the route of the app
-
-app.get('/', (req, res) => {
-    // res.send('Hello World!!!');
-    res.render('index', { title: 'My Express App', message: 'Hello' });
-});
 
 const port = process.env.PORT || 5000;
 
