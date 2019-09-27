@@ -27,6 +27,10 @@ console.log(`Application name: ${config.get('name')}`);
 console.log(`Application name: ${config.mail.host}`);
 console.log(`DB password: ${config.DB.password}`);
 
+// use template engine
+app.set('view engine', 'pug');
+app.set('views', './views'); // default views folder should be in the route of the app
+
 const courses = [
     { id: 1, name: 'course1' },
     { id: 2, name: 'course2' },
@@ -34,7 +38,8 @@ const courses = [
 ];
 
 app.get('/', (req, res) => {
-    res.send('Hello World!!!');
+    // res.send('Hello World!!!');
+    res.render('index', { title: 'My Express App', message: 'Hello' });
 });
 
 app.get('/api/courses', (req, res) => {
