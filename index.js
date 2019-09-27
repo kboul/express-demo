@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const helmet = require('helmet');
+const morgan = require('morgan');
 const validateCourse = require('./utils/validateCourse.js');
 const logger = require('./middlewares/logger.js');
 
@@ -14,6 +15,11 @@ app.use(express.static('assets'));
 app.use(helmet());
 
 app.use(logger);
+
+if (app.get('env') === 'development') {
+    app.use(morgan('tiny'));
+    console.log('Morgan enabled');
+}
 
 const courses = [
     { id: 1, name: 'course1' },
