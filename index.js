@@ -3,6 +3,7 @@ const app = express();
 const helmet = require('helmet');
 const morgan = require('morgan');
 const config = require('config');
+const startupDebugger = require('debug')('app:startup');
 const validateCourse = require('./utils/validateCourse.js');
 const logger = require('./middlewares/logger.js');
 
@@ -19,7 +20,7 @@ app.use(logger);
 
 if (app.get('env') === 'development') {
     app.use(morgan('tiny'));
-    console.log('Morgan enabled');
+    startupDebugger('Morgan enabled');
 }
 
 console.log(`Application name: ${config.get('name')}`);
