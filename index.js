@@ -53,6 +53,14 @@ const courseSchema = new mongoose.Schema({
     isPublished: Boolean
 });
 
+const Course = mongoose.model('Course', courseSchema);
+const course = new Course({
+    name: 'Node.js Course',
+    author: 'Mosh',
+    tags: ['node', 'backend'],
+    isPublished: true
+});
+
 // use template engine
 app.set('view engine', 'pug');
 app.set('views', './views'); // default views folder should be in the route of the app
