@@ -70,7 +70,7 @@ const createCourse = async () => {
 
 const getCourses = async () => {
     const allCourses = await Course.find();
-    console.log(allCourses);
+    // console.log(allCourses);
 };
 
 getCourses();
@@ -106,7 +106,14 @@ const updateCourseUpdateFirst = async id => {
     console.log(result);
 };
 // updateCourseQueryFirst('5d91beb5fb0b175aa1858174');
-updateCourseUpdateFirst('5d91beb5fb0b175aa1858174');
+// updateCourseUpdateFirst('5d91beb5fb0b175aa1858174');
+
+const removeCourse = async id => {
+    const result = await Course.deleteOne({ _id: id });
+    console.log(result);
+};
+
+// removeCourse('5d91beb5fb0b175aa1858174');
 
 // use template engine
 app.set('view engine', 'pug');
