@@ -68,6 +68,13 @@ const createCourse = async () => {
 
 // createCourse();
 
+const getCourses = async () => {
+    const allCourses = await Course.find();
+    console.log(allCourses);
+};
+
+getCourses();
+
 // use template engine
 app.set('view engine', 'pug');
 app.set('views', './views'); // default views folder should be in the route of the app
