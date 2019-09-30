@@ -29,8 +29,9 @@ app.use('/', home);
 app.use('/api/courses', courses);
 
 console.log(`Application name: ${config.get('name')}`);
-console.log(`Application name: ${config.mail.host}`);
-console.log(`DB password: ${config.DB.password}`);
+// console.log(`Application name: ${config.mail.host}`);
+// should declare env variable app_DB_passwordbefore
+// console.log(`DB password: ${config.DB.password}`);
 
 // use template engine
 app.set('view engine', 'pug');
