@@ -31,7 +31,7 @@ const createCourse = async () => {
     console.log(result);
 };
 
-createCourse();
+// createCourse();
 
 const getCourses = async () => {
     const allCourses = await Course.find();
