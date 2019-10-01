@@ -13,6 +13,11 @@ mongoose
 
 const courseSchema = new mongoose.Schema({
     name: { type: String, required: true, minlength: 5, maxlength: 255 },
+    category: {
+        type: String,
+        required: true,
+        enum: ['web', 'mobile', 'network']
+    },
     author: String,
     tags: [String],
     date: { type: Date, default: Date.now },
@@ -31,9 +36,11 @@ const Course = mongoose.model('Course', courseSchema);
 const createCourse = async () => {
     const course = new Course({
         name: 'Vue Course',
+        category: '-',
         author: 'Mosh',
         tags: ['vue', 'frontend'],
-        isPublished: true
+        isPublished: true,
+        price: 15
     });
 
     try {
