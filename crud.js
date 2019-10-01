@@ -16,7 +16,8 @@ const courseSchema = new mongoose.Schema({
         type: String,
         required: true,
         enum: ['web', 'mobile', 'network'],
-        lowercase: true
+        lowercase: true,
+        trim: true
     },
     author: String,
     tags: {
@@ -34,7 +35,9 @@ const courseSchema = new mongoose.Schema({
         type: Number,
         required: function() {
             return this.isPublished;
-        }
+        },
+        min: 10,
+        max: 200
     }
 });
 
