@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 const mongoose = require('mongoose');
 
 const options = {
@@ -15,7 +16,14 @@ const courseSchema = new mongoose.Schema({
     author: String,
     tags: [String],
     date: { type: Date, default: Date.now },
-    isPublished: Boolean
+    isPublished: Boolean,
+    price: {
+        type: Number,
+        // eslint-disable-next-line object-shorthand
+        required: function() {
+            return this.isPublished;
+        }
+    }
 });
 
 const Course = mongoose.model('Course', courseSchema);
@@ -25,7 +33,7 @@ const createCourse = async () => {
         name: 'Vue Course',
         author: 'Mosh',
         tags: ['vue', 'frontend'],
-        isPublished: false
+        isPublished: true
     });
 
     try {

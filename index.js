@@ -10,7 +10,7 @@ const home = require('./routes/home');
 const courses = require('./routes/courses');
 const crud = require('./crud');
 
-crud.getCourses();
+crud.createCourse();
 
 // enable parsing of JSON objects
 // in the body of the request by
