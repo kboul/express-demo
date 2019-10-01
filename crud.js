@@ -22,7 +22,7 @@ const Course = mongoose.model('Course', courseSchema);
 
 const createCourse = async () => {
     const course = new Course({
-        // name: 'Vue Course',
+        name: 'Vue Course',
         author: 'Mosh',
         tags: ['vue', 'frontend'],
         isPublished: false
@@ -36,14 +36,10 @@ const createCourse = async () => {
     }
 };
 
-createCourse();
-
 const getCourses = async () => {
     const allCourses = await Course.find();
     console.log(allCourses);
 };
-
-// getCourses();
 
 const updateCourseQueryFirst = async id => {
     const course = await Course.findById(id);
@@ -75,12 +71,16 @@ const updateCourseUpdateFirst = async id => {
     );
     console.log(result);
 };
-// updateCourseQueryFirst('5d91beb5fb0b175aa1858174');
-// updateCourseUpdateFirst('5d91beb5fb0b175aa1858174');
 
 const removeCourse = async id => {
     const result = await Course.deleteOne({ _id: id });
     console.log(result);
 };
 
-// removeCourse('5d91beb5fb0b175aa1858174');
+module.exports = {
+    createCourse,
+    getCourses,
+    updateCourseQueryFirst,
+    updateCourseUpdateFirst,
+    removeCourse
+};
