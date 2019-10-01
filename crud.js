@@ -43,7 +43,7 @@ const Course = mongoose.model('Course', courseSchema);
 const createCourse = async () => {
     const course = new Course({
         name: 'Vue Course',
-        category: 'web',
+        category: '-',
         author: 'Mosh',
         tags: null,
         isPublished: true,
@@ -53,8 +53,13 @@ const createCourse = async () => {
     try {
         const result = await course.save();
         console.log(result);
-    } catch (err) {
-        console.log(err.message);
+    } catch (ex) {
+        const { errors } = ex;
+        Object.keys(errors).forEach(key => {
+            if (errors) {
+                console.log(ex.errors[key].message);
+            }
+        });
     }
 };
 
