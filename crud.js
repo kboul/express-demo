@@ -15,7 +15,8 @@ const courseSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true,
-        enum: ['web', 'mobile', 'network']
+        enum: ['web', 'mobile', 'network'],
+        lowercase: true
     },
     author: String,
     tags: {
@@ -41,12 +42,12 @@ const Course = mongoose.model('Course', courseSchema);
 
 const createCourse = async () => {
     const course = new Course({
-        name: 'Vue Course',
-        category: '-',
+        name: 'jQuery',
+        category: 'Web',
         author: 'Mosh',
-        tags: null,
+        tags: ['frontend'],
         isPublished: true,
-        price: 15
+        price: 11
     });
 
     try {
