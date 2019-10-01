@@ -17,6 +17,7 @@
         "no-console": "off",
         "radix": "off",
         "import/newline-after-import": "off",
-        "object-shorthand": "off"
+        "object-shorthand": "off",
+        "func-names": "off"
     }
 }
